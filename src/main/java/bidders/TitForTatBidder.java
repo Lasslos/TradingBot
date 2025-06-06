@@ -21,11 +21,8 @@ public class TitForTatBidder implements Bidder {
     @Override
     public int placeBid() {
         // If we can't afford our usual bid, bid all cash that is left.
-        if (lastOtherBid + 1 > cash) {
-            return cash;
-        }
+        return Math.min(lastOtherBid + 1, cash);
 
-        return lastOtherBid + 1;
     }
 
     @Override
