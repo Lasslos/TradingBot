@@ -63,14 +63,14 @@ public class Main {
         // Print the results as a matrix
         System.out.print("\n  |");
         for (int i = 0; i < bidders.length; i++) {
-            System.out.printf("  %c |", 'a' + i);
+            System.out.printf(" %c |", 'a' + i);
         }
         for (int i = 0; i < bidders.length; i++) {
             System.out.print("\n");
             System.out.printf("%c |", 'a' + i);
             for (int j = 0; j < bidders.length; j++) {
                 /// Print the results out of 100
-                System.out.printf(" %3d|", (int) ((results[i][j] / (AUCTION_REPEATS * 2.0)) * 100.0));
+                System.out.printf("%3d|", (int) ((results[i][j] / (AUCTION_REPEATS * 2.0)) * 100.0));
             }
         }
     }
