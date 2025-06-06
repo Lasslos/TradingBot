@@ -1,5 +1,6 @@
 package auction;
 
+import eu.laslo_hauschild.RandomBidder;
 import eu.laslo_hauschild.SimpleBidder;
 import eu.laslo_hauschild.TitForTatBidder;
 
@@ -8,8 +9,8 @@ public class Auction {
         int quantity = 10; // quantity units
         int money = 100; // monetary units
 
-        Bidder bidder1 = new SimpleBidder();
-        Bidder bidder2 = new TitForTatBidder();
+        Bidder bidder1 = new TitForTatBidder();
+        Bidder bidder2 = new RandomBidder();
 
         runAuction(bidder1, bidder2, quantity, money);
     }
