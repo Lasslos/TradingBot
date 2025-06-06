@@ -70,7 +70,7 @@ public class Main {
             System.out.printf("%c |", 'a' + i);
             for (int j = 0; j < bidders.length; j++) {
                 /// Print the results out of 100
-                System.out.printf("%3d|", (int) ((results[i][j] / (AUCTION_REPEATS * 2.0)) * 100.0));
+                System.out.printf("%3d|", Math.round((results[i][j] / (AUCTION_REPEATS * 2.0)) * 100.0));
             }
         }
     }
