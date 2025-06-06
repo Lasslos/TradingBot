@@ -1,4 +1,4 @@
-package eu.laslo_hauschild;
+package bidders;
 
 import auction.Bidder;
 

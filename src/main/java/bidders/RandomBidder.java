@@ -1,4 +1,4 @@
-package eu.laslo_hauschild;
+package bidders;
 
 import auction.Bidder;
 
@@ -29,7 +29,12 @@ public class RandomBidder implements Bidder {
     public int placeBid() {
         // Generate a random bid around the average bid with some variation
         int randomBid = (int) (new Random().nextGaussian(averageBid, standardDeviation));
-        return Math.min(randomBid, cash); // Ensure the bid does not exceed available cash
+        if (randomBid < 0) {
+            randomBid = 0; // Ensure we always bid at least 0
+        } else if (randomBid > cash) {
+            randomBid = cash; // Ensure we do not bid more than we have
+        }
+        return randomBid;
     }
 
     @Override
