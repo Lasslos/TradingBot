@@ -1,8 +1,10 @@
 import auction.Auction;
 import auction.Bidder;
 import auction.bidders.RandomBidder;
+import auction.bidders.RandomBidder2;
 import auction.bidders.SimpleBidder;
 import auction.bidders.TitForTatBidder;
+import auction.bidders.util.WinConditionStrategy;
 
 
 public class Main {
@@ -15,8 +17,8 @@ public class Main {
     }
 
     public static void runOneAuction() {
-        Bidder bidder1 = new RandomBidder();
-        Bidder bidder2 = new SimpleBidder();
+        Bidder bidder1 = new RandomBidder2();
+        Bidder bidder2 = new TitForTatBidder();
         Auction auction = new Auction(bidder1, bidder2, INITIAL_QUANTITY, INITIAL_CASH);
         auction.run(true);
     }
@@ -25,7 +27,8 @@ public class Main {
         Bidder[] bidders = {
             new SimpleBidder(),
             new RandomBidder(),
-            new TitForTatBidder()
+            new TitForTatBidder(),
+            new RandomBidder2(),
         };
 
         // Stores how many points each bidder has against each other bidder
