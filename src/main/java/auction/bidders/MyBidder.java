@@ -1,4 +1,4 @@
-package bidders;
+package auction.bidders;
 
 public class MyBidder extends AbstractBidder {
     @Override

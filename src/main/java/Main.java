@@ -1,6 +1,8 @@
 import auction.Auction;
 import auction.Bidder;
-import bidders.*;
+import auction.bidders.RandomBidder;
+import auction.bidders.SimpleBidder;
+import auction.bidders.TitForTatBidder;
 
 
 public class Main {

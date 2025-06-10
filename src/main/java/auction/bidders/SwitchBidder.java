@@ -1,6 +1,4 @@
-package bidders;
-
-import auction.Bidder;
+package auction.bidders;
 
 /**
  * This counts how many rounds it still needs to win, and either bets zero or a much higher amount.

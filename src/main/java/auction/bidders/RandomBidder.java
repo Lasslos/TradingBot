@@ -1,6 +1,4 @@
-package bidders;
-
-import auction.Bidder;
+package auction.bidders;
 
 import java.util.Random;
 

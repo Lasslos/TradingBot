@@ -1,4 +1,4 @@
-package bidders;
+package auction.bidders;
 
 /**
  * Places the same bid + 1 as the other bidder in the previous round.
