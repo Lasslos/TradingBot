@@ -7,7 +7,10 @@ import java.util.Random;
 /**
  * Bids random amounts with random numbers.
  * Average bid is [cash / quantity * 2].
- * Standard deviation is 20% of that.
+ * Standard deviation is 50% of that.
+ * <p>
+ * This bidder does not use all of its cash in the end, even if it is clear that it can win the auction that way.
+ * See {@link RandomBidder2} for a more aggressive version that uses all cash.
  */
 public class RandomBidder implements Bidder {
     private int cash;
@@ -22,7 +25,7 @@ public class RandomBidder implements Bidder {
         this.quantity = quantity;
 
         this.averageBid = (cash / quantity) * 2;
-        this.standardDeviation = averageBid / 5; // 20% of the average bid
+        this.standardDeviation = averageBid / 2; // 50% of the average bid
     }
 
     @Override
