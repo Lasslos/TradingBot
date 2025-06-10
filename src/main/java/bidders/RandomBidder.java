@@ -12,18 +12,13 @@ import java.util.Random;
  * This bidder does not use all of its cash in the end, even if it is clear that it can win the auction that way.
  * See {@link RandomBidder2} for a more aggressive version that uses all cash.
  */
-public class RandomBidder implements Bidder {
-    private int cash;
-    private int quantity;
-
+public class RandomBidder extends AbstractBidder {
     private int averageBid;
     private int standardDeviation;
 
     @Override
     public void init(int quantity, int cash) {
-        this.cash = cash;
-        this.quantity = quantity;
-
+        super.init(quantity, cash);
         this.averageBid = (cash / quantity) * 2;
         this.standardDeviation = averageBid / 2; // 50% of the average bid
     }
@@ -34,14 +29,9 @@ public class RandomBidder implements Bidder {
         int randomBid = (int) (new Random().nextGaussian(averageBid, standardDeviation));
         if (randomBid < 0) {
             randomBid = 0; // Ensure we always bid at least 0
-        } else if (randomBid > cash) {
-            randomBid = cash; // Ensure we do not bid more than we have
+        } else if (randomBid > ownCash) {
+            randomBid = ownCash; // Ensure we do not bid more than we have
         }
         return randomBid;
-    }
-
-    @Override
-    public void bids(int own, int other) {
-        cash -= own; // Deduct the own bid from cash
     }
 }
