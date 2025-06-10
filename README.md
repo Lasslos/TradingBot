@@ -31,7 +31,6 @@ Another simple strategy is to bid one more than the opponent's last bid, or all 
 This is [TitForTatBidder](src/main/java/bidders/TitForTatBidder.java)
 
 Lastly, [RandomBidder](src/main/java/bidders/RandomBidder.java) bids a random amount between 0 and the maximum amount it can bid, with a gaussian distribution to get random numbers.
-
 # Some ideas
 
 ### Randomness
@@ -48,7 +47,3 @@ If $2q_i > q_s$, we can start bidding 0, as we have already won more than half o
 
 If we need to win $x$ rounds to reach the win condition, and $\frac{m_i}{m_o} > x$, then the SimpleBidder strategy
 with bet size $\frac{m_i}{x}$ wins, as the opponent does not have enough money to post the same bet size.
-
-### Bidding strategy
-
-If no win condition is met, there is no clear optimal bet size. Here, one should
