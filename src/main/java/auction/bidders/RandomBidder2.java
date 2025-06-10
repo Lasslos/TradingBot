@@ -14,8 +14,8 @@ public class RandomBidder2 extends AbstractBidder {
     @Override
     public int placeBid() {
         // If a win condition is met, switch to the win condition strategy
-        if (WinConditionStrategy.isWinConditionMet(startQuantity, ownQuantity, ownCash, otherCash)) {
-            return WinConditionStrategy.getNextBid(startQuantity, ownQuantity, ownCash, otherCash);
+        if (WinConditionStrategy.isWinConditionMet(startQuantity, ownQuantity, ownCash, otherQuantity, otherCash)) {
+            return WinConditionStrategy.getNextBid(startQuantity, ownQuantity, ownCash, otherQuantity, otherCash);
         }
         // In the last round, bid all remaining cash
         if (isLastRound(startQuantity, ownQuantity, otherQuantity)) {
@@ -23,7 +23,7 @@ public class RandomBidder2 extends AbstractBidder {
         }
 
         int averageBid = (ownCash / (startQuantity - ownQuantity - otherQuantity)) * 2;
-        int standardDeviation = averageBid / 2; // 50% of the average bid
+        int standardDeviation = averageBid / 3; // 50% of the average bid
         // Generate a random bid around the average bid with some variation
         int randomBid = (int) (new Random().nextGaussian(averageBid, standardDeviation));
         if (randomBid < 0) {

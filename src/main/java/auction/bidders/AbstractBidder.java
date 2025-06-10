@@ -38,6 +38,8 @@ public abstract class AbstractBidder implements Bidder {
         this.startCash = cash;
         this.ownCash = cash;
         this.otherCash = cash;
+        this.ownQuantity = 0;
+        this.otherQuantity = 0;
     }
 
     @Override

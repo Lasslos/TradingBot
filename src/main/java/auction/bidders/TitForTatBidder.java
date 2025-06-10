@@ -5,8 +5,14 @@ package auction.bidders;
  */
 public class TitForTatBidder extends AbstractBidder {
 
-    // Initialize to -1 in first round. This way, the first bid will be 0.
     private int lastOtherBid = -1;
+
+    @Override
+    public void init(int quantity, int cash) {
+        super.init(quantity, cash);
+        // Initialize to -1 in first round. This way, the first bid will be 0.
+        this.lastOtherBid = -1;
+    }
 
     @Override
     public int placeBid() {
