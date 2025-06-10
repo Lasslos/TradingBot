@@ -48,7 +48,7 @@ public class Auction {
         BidderData bidder2Data = new BidderData(initialQuantity, initialMoney);
         // Auction rounds
         for (int round = 0; round < initialQuantity / 2; round++) {
-            if (verbose) System.out.printf("Round %d/%d", round + 1, initialQuantity / 2);
+            if (verbose) System.out.printf("Round %d/%d ", round + 1, initialQuantity / 2);
             runRound(bidder1Data, bidder2Data, verbose);
         }
         AuctionResult result = AuctionResult.fromBidderData(bidder1Data, bidder2Data);
