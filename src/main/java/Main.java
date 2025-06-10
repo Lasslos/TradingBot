@@ -4,22 +4,26 @@ import bidders.*;
 
 
 public class Main {
-    final static int INITIAL_QUANTITY = 10;
-    final static int INITIAL_CASH = 100;
+    final static int INITIAL_QUANTITY = 30;
+    final static int INITIAL_CASH = 300;
     final static int AUCTION_REPEATS = 5000;
 
     public static void main(String[] args) {
+        runBidderArena();
+    }
+
+    public static void runOneAuction() {
         Bidder bidder1 = new RandomBidder();
-        Bidder bidder2 = new RandomBidder();
+        Bidder bidder2 = new SimpleBidder();
         Auction auction = new Auction(bidder1, bidder2, INITIAL_QUANTITY, INITIAL_CASH);
         auction.run(true);
     }
 
     public static void runBidderArena() {
         Bidder[] bidders = {
-                new SimpleBidder(),
-                new RandomBidder(),
-                new TitForTatBidder()
+            new SimpleBidder(),
+            new RandomBidder(),
+            new TitForTatBidder()
         };
 
         // Stores how many points each bidder has against each other bidder
