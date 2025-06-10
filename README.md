@@ -47,6 +47,3 @@ If $2q_i > q_s$, we can start bidding 0, as we have already won more than half o
 
 If we need to win $x$ rounds to reach the win condition, and $\frac{m_i}{m_o} > x$, then the SimpleBidder strategy
 with bet size $\frac{m_i}{x}$ wins, as the opponent does not have enough money to post the same bet size.
-
-### More strategies
-SwitchBidder a strategy that switches between bidding 0 and bidding a lot higher amounts.
