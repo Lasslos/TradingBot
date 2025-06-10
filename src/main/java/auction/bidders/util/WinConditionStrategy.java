@@ -10,7 +10,7 @@ public class WinConditionStrategy {
      * @param otherCash The cash available to the other bidder.
      * @return true if a win condition is met, false otherwise.
      */
-    public static boolean isWinConditionMet(int startQuantity, int ownQuantity, int ownCash, int otherCash) {
+    public static boolean isWinConditionMet(int startQuantity, int ownQuantity, int ownCash, int otherQuantity, int otherCash) {
         // First win condition: Own quantity is more than half of the total quantity
         if (2 * ownQuantity > startQuantity) {
             return true;
@@ -20,9 +20,13 @@ public class WinConditionStrategy {
             return true;
         }
         // How many quantity units are needed to get more than half of the total quantity
-        int quantityRemaining = startQuantity / 2 - ownQuantity + 1;
-        int wonRoundsNeeded = (int) Math.ceil(quantityRemaining / 2.0);
+        int quantityNeeded = startQuantity / 2 - ownQuantity + 1;
+        int quantityRemaining = startQuantity - ownQuantity - otherQuantity;
+        if (quantityNeeded < quantityRemaining) {
+            return false; // Not enough quantity remaining to win
+        }
         // Third win condition: If we can bet more than the entire cash of the other bidder for [wonRoundsNeeded] rounds.
+        int wonRoundsNeeded = (int) Math.ceil(quantityNeeded / 2.0); // Each round we can win 2 quantity units
         if (ownCash > (otherCash+1) * wonRoundsNeeded) {
             return true;
         }
@@ -37,8 +41,8 @@ public class WinConditionStrategy {
      * @param otherCash The cash available to the other bidder.
      * @return The next bid amount if a win condition is met.
      */
-    public static int getNextBid(int startQuantity, int ownQuantity, int ownCash, int otherCash) {
-        if (!isWinConditionMet(startQuantity, ownQuantity, ownCash, otherCash)) {
+    public static int getNextBid(int startQuantity, int ownQuantity, int ownCash, int otherQuantity, int otherCash) {
+        if (!isWinConditionMet(startQuantity, ownQuantity, ownCash, otherQuantity, otherCash)) {
             throw new IllegalStateException("Win condition not met, cannot calculate next bid.");
         }
         if (2 * ownQuantity > startQuantity) {
