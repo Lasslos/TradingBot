@@ -98,8 +98,8 @@ public class OpponentStrategyBidder {
         }
 
         // Compare lists, offset by one
-        Iterator<Integer> ownBidsIt = ownBids.subList(1, ownBids.size()).iterator();
-        Iterator<Integer> otherBidsIt = otherBids.subList(0, otherBids.size() - 1).iterator();
+        Iterator<Integer> ownBidsIt = ownBids.subList(0, ownBids.size() - 1).iterator();
+        Iterator<Integer> otherBidsIt = otherBids.subList(1, otherBids.size()).iterator();
 
         int averageOffset = 0;
 
@@ -110,8 +110,8 @@ public class OpponentStrategyBidder {
             averageOffset += Math.abs(ownBid - otherBid);
         }
         averageOffset /= ownBids.size() - 1;
-        // Return last bid + averageOffset * (120%)
-        return ownBids.getLast() + averageOffset * 5 / 4;
+        // Return (last bid + averageOffset) * (120%)
+        return (int) ((ownBids.getLast() + averageOffset) * 1.2);
     }
 
     /**
@@ -145,7 +145,7 @@ public class OpponentStrategyBidder {
             if (otherCash > initialCash / 2) {
                 // if he sometimes does low bids, return more than his average low bid
                 if (averageLowBid > 0) {
-                    return (int) (averageLowBid * 1.2); // 20% more than average low bid
+                    return (int) Math.ceil(averageLowBid * 1.2); // 20% more than average low bid
                 } else {
                     return 0; // If no low bids, just bid 0
                 }
@@ -159,7 +159,7 @@ public class OpponentStrategyBidder {
                 }
                 int lastBid = otherBids.getLast();
                 int secondLastBid = otherBids.get(otherBids.size() - 2);
-                return (int) (((lastBid + secondLastBid) / 2.0) * 1.2); // 120% more than the average of the last two bids
+                return (int) Math.ceil(((lastBid + secondLastBid) / 2.0) * 1.2); // 120% more than the average of the last two bids
             }
         }
 
@@ -167,7 +167,7 @@ public class OpponentStrategyBidder {
         // In this case, sometimes outbid the opponent, sometimes bid very low. See docs for details.
 
         // We can afford to outbid the opponent. To keep our cash, bet low sometimes.
-        int highBid = (int) (averageHighBid * 1.2); // 20% more than the average high bid
+        int highBid = (int) Math.ceil(averageHighBid * 1.2); // 20% more than the average high bid
         int roundsRemaining = initialQuantity / 2 - ownBids.size();
         // If we have less cash than the opponent, we need to be careful with our bids.
         if (ownCash < otherCash) {
@@ -181,13 +181,13 @@ public class OpponentStrategyBidder {
         int highThreshold = 2 * initialCash / initialQuantity;
         double averageLowBid = 0.0;
         for (int bid : otherBids) {
-            if (bid < highThreshold) {
+            if (bid <= highThreshold) {
                 averageLowBid += bid;
             }
         }
         averageLowBid /= otherBids.size(); // Average of all low bids
         // Bid 120% of the average low bid. See docs for details.
-        return (int) (averageLowBid * 1.2);
+        return (int) Math.ceil(averageLowBid * 1.2);
     }
 
     public int getNextRandomBid() {
@@ -202,7 +202,7 @@ public class OpponentStrategyBidder {
         } else {
             // There is not much we can do if the opponent bets randomly but not in any range like in "AggressiveSimple" or "ConservativeSimple".
             // Just bid more, and if we don't have enough cash, bid zero. See docs for details.
-            return (int) (averageBid * 1.2);
+            return (int) Math.ceil(averageBid * 1.2);
         }
     }
 }

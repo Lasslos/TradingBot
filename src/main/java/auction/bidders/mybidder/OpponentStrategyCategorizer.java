@@ -67,8 +67,8 @@ public class OpponentStrategyCategorizer {
         // average of how close two consecutive bids are
         double result = 0.0;
         // Compare lists, offset by one
-        Iterator<Integer> ownBidsIt = ownBids.subList(1, ownBids.size()).iterator();
-        Iterator<Integer> otherBidsIt = otherBids.subList(0, otherBids.size() - 1).iterator();
+        Iterator<Integer> ownBidsIt = ownBids.subList(0, ownBids.size() - 1).iterator();
+        Iterator<Integer> otherBidsIt = otherBids.subList(1, otherBids.size()).iterator();
 
         // Iterate over matches
         for (int i = 0; i < ownBids.size() - 1; i++) {
@@ -77,9 +77,9 @@ public class OpponentStrategyCategorizer {
             int averageBid = 2 * initialCash / initialQuantity;
 
             // A bid is a perfect match (=1.0) if the same amount was bet.
-            // A bid is not a match if there is a difference of half the average bid size.
+            // A bid is definitely not match if there is a difference the whole average bid
             // In between, linear curve.
-            result += Math.min(1.0 - (Math.abs(ownBid - otherBid) / (averageBid / 2.0)), 0.0);
+            result += Math.max(1.0 - ((double) Math.abs(ownBid - otherBid) / averageBid), 0.0);
         }
         result /= ownBids.size() - 1;
         return result;
