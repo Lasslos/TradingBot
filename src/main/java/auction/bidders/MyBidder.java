@@ -23,10 +23,6 @@ public class MyBidder extends AbstractBidder {
         if (WinConditionStrategy.isWinConditionMet(startQuantity, ownQuantity, ownCash, otherQuantity, otherCash)) {
             return WinConditionStrategy.getNextBid(startQuantity, ownQuantity, ownCash, otherQuantity, otherCash);
         }
-        // In the last round, bid all remaining cash
-        if (isLastRound(startQuantity, ownQuantity, otherQuantity)) {
-            return ownCash; // Bid all remaining cash in the last round
-        }
 
         // Categorize the opponent's strategy
         OpponentStrategy strategy = categorizer.categorize();

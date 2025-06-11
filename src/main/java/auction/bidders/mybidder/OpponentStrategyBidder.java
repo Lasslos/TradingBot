@@ -202,7 +202,7 @@ public class OpponentStrategyBidder {
         } else {
             // There is not much we can do if the opponent bets randomly but not in any range like in "AggressiveSimple" or "ConservativeSimple".
             // Just bid more, and if we don't have enough cash, bid zero. See docs for details.
-            return (int) Math.ceil(averageBid * 1.2);
+            return (int) Math.ceil(averageBid * 1.5);
         }
     }
 }

@@ -14,7 +14,7 @@ public class Main {
     }
 
     public static void runOneAuction() {
-        Bidder bidder1 = new TitForTatBidder();
+        Bidder bidder1 = new RandomBidder();
         Bidder bidder2 = new MyBidder();
         Auction auction = new Auction(bidder1, bidder2, INITIAL_QUANTITY, INITIAL_CASH);
         auction.run(true);

@@ -103,5 +103,24 @@ According to the opponent's strategy, we adapt our own strategy:
 - Random: Calculate average and bid slightly above it.
 
 # Last rounds
-If win condition is not reached, use all of the money to win the last rounds.
+If win condition is not reached, use all the money to win the last rounds.
 Use knowledge of opponent's available money.
+
+# Second Analysis
+
+My Bidder performs well against the default strategies:
+a - SimpleBidder
+b - RandomBidder
+c - TitForTatBidder
+d - RandomBidder2
+e - MyBidder
+
+  | a | b | c | d | e |
+a |  0| 62|  0| 61|  0|
+b | 38|  0| 47| 40| 30|
+c |100| 53|  0| 56|  0|
+d | 39| 60| 44|  0| 17|
+e |100| 70|100| 83|  0|
+
+I'd like to question if this strategy is actually any good against other sophisticated strategies,
+but it performs good enough against the default strategies.
