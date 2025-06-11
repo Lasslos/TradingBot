@@ -1,9 +1,6 @@
 import auction.Auction;
 import auction.Bidder;
-import auction.bidders.RandomBidder;
-import auction.bidders.RandomBidder2;
-import auction.bidders.SimpleBidder;
-import auction.bidders.TitForTatBidder;
+import auction.bidders.*;
 import auction.bidders.util.WinConditionStrategy;
 
 
@@ -29,6 +26,7 @@ public class Main {
             new RandomBidder(),
             new TitForTatBidder(),
             new RandomBidder2(),
+            new MyBidder(),
         };
 
         // Stores how many points each bidder has against each other bidder

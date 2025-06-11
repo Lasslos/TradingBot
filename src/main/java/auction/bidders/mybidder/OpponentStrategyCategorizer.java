@@ -1,5 +1,7 @@
 package auction.bidders.mybidder;
 
+import auction.bidders.util.Utils;
+
 import java.util.*;
 
 public class OpponentStrategyCategorizer {
@@ -126,9 +128,9 @@ public class OpponentStrategyCategorizer {
      * Medium bid: > initialCash / initialQuantity
      * Low bid: > 0
      *
-     * @return A 4-element array where each element is the count of bids in the respective category.
+     * @return A 4-element array, index 0 is very high, index 1 is high, index 2 is medium, index 3 is low.
      */
-    private int[] getBidFrequencies() {
+    public int[] getBidFrequencies() {
         int[] result = new int[4];
         int veryHighThreshold = initialCash / (int) Math.ceil((initialQuantity + 1) / 4.0);
         int highThreshold = 2 * initialCash / initialQuantity;
