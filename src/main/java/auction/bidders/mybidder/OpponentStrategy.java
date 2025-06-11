@@ -5,6 +5,5 @@ public enum OpponentStrategy {
     SIMPLE_CONSERVATIVE,
     TIT_FOR_TAT,
     RANDOM,
-    GOOD,
     UNKNOWN,
 }
