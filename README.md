@@ -94,7 +94,6 @@ We categorize the opponent's strategy into these categories:
 - Simple_Conservative: Bids medium or low amounts
 - TitForTat: Bids close to our last bid
 - Random: Bids random amounts across all categories
-- Good: Frequently outperforms us by a close margins
 
 # Adapting to the opponent's strategy
 According to the opponent's strategy, we adapt our own strategy:
@@ -102,7 +101,6 @@ According to the opponent's strategy, we adapt our own strategy:
 - Simple_Conservative: See amount categories above
 - TitForTat: Bid very low amounts, then slowly increase the bid, then drop back to zero.
 - Random: Calculate average and bid slightly above it.
-- Good: Randomize some bids to be less predictable.
 
 # Last rounds
 If win condition is not reached, use all of the money to win the last rounds.
