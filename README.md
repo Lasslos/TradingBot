@@ -71,6 +71,9 @@ This will work well against static strategies, but might be worse against strate
 
 # MyStrategy
 
+The final strategy is a sophisticated bidder that tries to predict the opponent's strategy and adapts to it.
+See [MyBidder](src/main/java/auction/bidders/mybidder/MyBidder.java).
+
 ### Edge cases
 - Very few QU are auctioned (3 rounds or less): Predicting the opponent's strategy is not worth it, as there are not enough rounds to adapt.
 So, just bid 0 one time and the other times bid half of the money, this is not optimal, but good enough.
@@ -113,14 +116,17 @@ a - SimpleBidder
 b - RandomBidder
 c - TitForTatBidder
 d - RandomBidder2
-e - MyBidder
+e - SimpleHighBidder
+f - MyBidder
 
-  | a | b | c | d | e |
-a |  0| 62|  0| 61|  0|
-b | 38|  0| 47| 40| 30|
-c |100| 53|  0| 56|  0|
-d | 39| 60| 44|  0| 17|
-e |100| 70|100| 83|  0|
+  | a | b | c | d | e | f |
+a |  0| 64|  0| 60|  0|  0|
+b | 36|  0| 48| 40| 11| 30|
+c |100| 52|  0| 57|100|  0|
+d | 40| 60| 43|  0|  0| 18|
+e |100| 89|  0|100|  0|  0|
+f |100| 70|100| 82|100|  0|
 
 I'd like to question if this strategy is actually any good against other sophisticated strategies,
 but it performs good enough against the default strategies.
+Especially against RandomBidder and RandomBidder2, there is room for improvement, as they are not always being beaten.
