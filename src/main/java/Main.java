@@ -1,31 +1,48 @@
 import auction.Auction;
 import auction.Bidder;
 import auction.bidders.*;
-import auction.bidders.util.WinConditionStrategy;
+import auction.bidders.mybidder.MyBidder;
 
 
 public class Main {
+    /**
+     * How many QU are in each auction simulated below.
+     */
     final static int INITIAL_QUANTITY = 30;
+    /**
+     * How much cash each bidder has in each auction simulated below.
+     */
     final static int INITIAL_CASH = 300;
+    /**
+     * How many times each auction is repeated in the bidder arena.
+     */
     final static int AUCTION_REPEATS = 5000;
 
     public static void main(String[] args) {
         runBidderArena();
     }
 
+    /**
+     * Tests a single auction with two bidders in verbose mode.
+     */
     public static void runOneAuction() {
-        Bidder bidder1 = new RandomBidder();
+        Bidder bidder1 = new SimpleHighBidder();
         Bidder bidder2 = new MyBidder();
         Auction auction = new Auction(bidder1, bidder2, INITIAL_QUANTITY, INITIAL_CASH);
         auction.run(true);
     }
 
+    /**
+     * Runs a series of auctions between different bidders to compare their performance.
+     * Each bidder is paired with every other bidder, and the results are stored in a matrix.
+     */
     public static void runBidderArena() {
         Bidder[] bidders = {
             new SimpleBidder(),
             new RandomBidder(),
             new TitForTatBidder(),
             new RandomBidder2(),
+            new SimpleHighBidder(),
             new MyBidder(),
         };
 
