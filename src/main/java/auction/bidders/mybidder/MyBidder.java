@@ -1,11 +1,7 @@
-package auction.bidders;
+package auction.bidders.mybidder;
 
-import auction.bidders.mybidder.OpponentStrategy;
-import auction.bidders.mybidder.OpponentStrategyBidder;
-import auction.bidders.mybidder.OpponentStrategyCategorizer;
+import auction.bidders.AbstractBidder;
 import auction.bidders.util.WinConditionStrategy;
-
-import static auction.bidders.util.Utils.isLastRound;
 
 public class MyBidder extends AbstractBidder {
     OpponentStrategyCategorizer categorizer;

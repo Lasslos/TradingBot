@@ -116,6 +116,7 @@ public class OpponentStrategyBidder {
 
     /**
      * Returns a good next bid if the opponent uses a simple aggressive strategy.
+     * Asserts that [OpponentStrategyCategorizer.isSimpleAggressive()] is more than 0.0 => at least half of the bids are above the high threshold.
      *
      * @return The next bid to be made.
      */
@@ -138,6 +139,11 @@ public class OpponentStrategyBidder {
         }
 
         averageHighBid = numberOfHighBids > 0 ? averageHighBid / numberOfHighBids : 0; // Avoid division by zero
+        // If there are no high bids, something went wrong.
+        if (averageHighBid == 0) {
+            System.err.println("Warning: No high bids found in getNextSimpleAggressiveBid");
+            return getNextRandomBid();
+        }
         averageLowBid = numberOfHighBids < otherBids.size() ? averageLowBid / (otherBids.size() - numberOfHighBids) : 0; // Avoid division by zero
 
         // If the opponent is betting very high and still has a lot of cash, let him bleed out
@@ -147,7 +153,7 @@ public class OpponentStrategyBidder {
                 if (averageLowBid > 0) {
                     return (int) Math.ceil(averageLowBid * 1.2); // 20% more than average low bid
                 } else {
-                    return 0; // If no low bids, just bid 0
+                    return 0; // If no low bids to potentially outbid, just bid 0
                 }
             } else {
                 // If the opponent is betting very high but has little cash, he cannot keep his very high bids up.
@@ -168,7 +174,6 @@ public class OpponentStrategyBidder {
 
         // We can afford to outbid the opponent. To keep our cash, bet low sometimes.
         int highBid = (int) Math.ceil(averageHighBid * 1.2); // 20% more than the average high bid
-        int roundsRemaining = initialQuantity / 2 - ownBids.size();
         // If we have less cash than the opponent, we need to be careful with our bids.
         if (ownCash < otherCash) {
             return 0;
@@ -176,6 +181,11 @@ public class OpponentStrategyBidder {
             return highBid; // We can afford to outbid the opponent
         }
     }
+
+    /**
+     * Returns a good next bid if the opponent uses a simple conservative strategy.
+     * @return The next bid to be made.
+     */
     public int getNextSimpleConservativeBid() {
         // Calculate average low bid based on the opponent's bids.
         int highThreshold = 2 * initialCash / initialQuantity;
@@ -185,11 +195,21 @@ public class OpponentStrategyBidder {
                 averageLowBid += bid;
             }
         }
+        // If there are no low bids, something went wrong.
+        if (averageLowBid == 0) {
+            System.err.println("Warning: No low bids found in getNextSimpleConservativeBid");
+            return getNextRandomBid();
+        }
         averageLowBid /= otherBids.size(); // Average of all low bids
         // Bid 120% of the average low bid. See docs for details.
         return (int) Math.ceil(averageLowBid * 1.2);
     }
 
+    /**
+     * Gets a next bid if the opponent is betting randomly.
+     * The next bid is calculated as 150% of the average of all their bids.
+     * @return The next bid to be made.
+     */
     public int getNextRandomBid() {
         double averageBid = 0;
         for (int bid : otherBids) {

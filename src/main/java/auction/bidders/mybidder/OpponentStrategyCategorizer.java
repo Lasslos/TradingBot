@@ -1,15 +1,13 @@
 package auction.bidders.mybidder;
 
-import auction.bidders.util.Utils;
-
 import java.util.*;
 
 public class OpponentStrategyCategorizer {
-    private List<Integer> ownBids;
-    private List<Integer> otherBids;
+    private final List<Integer> ownBids;
+    private final List<Integer> otherBids;
 
-    private int initialQuantity;
-    private int initialCash;
+    private final int initialQuantity;
+    private final int initialCash;
 
     private final static double TIT_FOR_TAT_THRESHOLD = 0.8;
     private final static double SIMPLE_AGGRESSIVE_THRESHOLD = 0.8;
@@ -43,7 +41,7 @@ public class OpponentStrategyCategorizer {
             return OpponentStrategy.UNKNOWN; // Not enough data to categorize
         }
 
-        // Check for simple aggressive strategy
+        // Check strategies. Since there is overlap between strategies, we check them in order of specificity.
         if (isTitForTat() > TIT_FOR_TAT_THRESHOLD) {
             return OpponentStrategy.TIT_FOR_TAT;
         }
