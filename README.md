@@ -31,7 +31,7 @@ Another simple strategy is to bid one more than the opponent's last bid, or all 
 This is [TitForTatBidder](src/main/java/auction/bidders/TitForTatBidder.java)
 
 Lastly, [RandomBidder](src/main/java/auction/bidders/RandomBidder.java) bids a random amount between 0 and the maximum amount it can bid, with a gaussian distribution to get random numbers.
-[RandomBidder2](src/main/java/auction/bidders/RandomBidder2.java) is similar, but uses a uniform distribution instead.
+[RandomBidder2](src/main/java/auction/bidders/RandomBidder2.java) is similar, but does some additional computing to check wether win conditions are met and so on.
 # Some ideas
 
 ### Randomness
