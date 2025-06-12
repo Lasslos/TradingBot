@@ -38,10 +38,7 @@ Lastly, [RandomBidder](src/main/java/auction/bidders/RandomBidder.java) bids a r
 Firstly, there is no optimal strategy that does not rely on randomness.
 If there was a non-random strategy that is optimal, the opponent could just bet one more than the optimal amount and win almost every round.
 
-This means, we have to use randomness to be less predictable.
-
-Since this is true for the opponent as well, we should not try to predict the opponent's strategy, assuming the opponent
-is a sophisticated strategy.
+This means, we could use randomness to be less predictable.
 
 ### Win conditions
 If $2q_i > q_s$, we can start bidding 0, as we have already won more than half of the quantitative units.
